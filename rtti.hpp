@@ -5,11 +5,24 @@
 #ifndef RTTI_HPP_
 #define RTTI_HPP_
 
-#include "core/utils/string_utils.hpp"
 #include <functional>
 #include <map>
+#include <string>
 
 namespace cxl {
+
+inline uint64_t simpleHash(const std::string& str) {
+    // fnv-1a
+    uint64_t hash = 2166136261UL;
+    if (str.c_str()){
+        const char* c = str.c_str();
+        while(*c != '\0') {
+            hash = (hash ^ (*c++)) * 16777619;
+        }
+    }
+    return hash;
+}
+
 class RTTI {
 public:
         
