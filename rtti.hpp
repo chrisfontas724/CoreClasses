@@ -11,17 +11,7 @@
 
 namespace cxl {
 
-inline uint64_t simpleHash(const std::string& str) {
-    // fnv-1a
-    uint64_t hash = 2166136261UL;
-    if (str.c_str()){
-        const char* c = str.c_str();
-        while(*c != '\0') {
-            hash = (hash ^ (*c++)) * 16777619;
-        }
-    }
-    return hash;
-}
+inline uint64_t simpleHash(const std::string& str);
 
 class RTTI {
 public:
@@ -65,6 +55,18 @@ protected:
         return map;
     }
 };
+
+inline uint64_t simpleHash(const std::string& str) {
+    // fnv-1a
+    uint64_t hash = 2166136261UL;
+    if (str.c_str()){
+        const char* c = str.c_str();
+        while(*c != '\0') {
+            hash = (hash ^ (*c++)) * 16777619;
+        }
+    }
+    return hash;
+}
 } // cxl
 
 #define RTTI_BASE(CLASSTYPE)                                                       \
