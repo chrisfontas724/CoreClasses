@@ -1,5 +1,5 @@
-// Copyright 2019 Sic Studios. All rights reserved.
-// Use of this source code is governed by our license that can be
+// Copyright 2019 Chris Fontas. All rights reserved.
+// Use of this source code is governed by the license that can be
 // found in the LICENSE file.
 
 #ifndef RTTI_SERVICE_HPP_
