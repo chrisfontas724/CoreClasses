@@ -58,7 +58,7 @@ namespace cxl {
         }
         
         T* generate(const std::string& name) {
-	        uint32_t class_id = utils::simpleHash(name);
+	        uint32_t class_id = simpleHash(name);
             if (registry_.count(class_id)) {
                 const Generator* generator = registry_[class_id];
                 return generator->generate();
@@ -67,7 +67,7 @@ namespace cxl {
         }
         
         uint32_t hashClass(const std::string& class_name) {
-            return (uint32_t)utils::simpleHash(class_name);
+            return (uint32_t)simpleHash(class_name);
         }
         
         const std::string& class_name(uint32_t type) {
