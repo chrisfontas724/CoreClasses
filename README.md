@@ -8,43 +8,43 @@ Just drop these headers into your project and begin using.
 # Example Usage (Creating Factory Service)
 
 
-// Create a base class and include the RTTI_BASE macro
+    // Create a base class and include the RTTI_BASE macro
 
-class Base {
+    class Base {
 
-     RTTI_BASE(Base)
-};
+         RTTI_BASE(Base)
+    };
 
-// Define a factory service for the base class with the following macro
+    // Define a factory service for the base class with the following macro
 
-DEFINE_FACTORY_SERVICE(Base);
+    DEFINE_FACTORY_SERVICE(Base);
 
 
-// Now create a derived class that inherits from Base, and include the
+    // Now create a derived class that inherits from Base, and include the
 
-// RTTI_DERIVED macro
+    // RTTI_DERIVED macro
 
-class Derived : public Base{
+    class Derived : public Base{
 
-    RTTI_DERIVED(Derived, Base)
+        RTTI_DERIVED(Derived, Base)
     
-};
+    };
 
-// Register the derived class as part of the Base Factory
+    // Register the derived class as part of the Base Factory
 
-REGISTER_CLASS(Derived, Base)
+    REGISTER_CLASS(Derived, Base)
 
 
-// Now your factory is automatically set up and registered with the
+    // Now your factory is automatically set up and registered with the
 
-// Locator. You can now simply use the locator to get your factory
+    // Locator. You can now simply use the locator to get your factory
 
-// and begin generating instances of your derived classes. You can
+    // and begin generating instances of your derived classes. You can
 
-// use either the name of the class as a string, or use the class's
+    // use either the name of the class as a string, or use the class's
 
-// RTTI type.
+    // RTTI type.
 
-cxl::Locator::get<BaseFactoryService>()->generate("Derived");
+    cxl::Locator::get<BaseFactoryService>()->generate("Derived");
 
-cxl::Locator::get<BaseFactoryService>()->generate(Derived::_RTTI());
+    cxl::Locator::get<BaseFactoryService>()->generate(Derived::_RTTI());
