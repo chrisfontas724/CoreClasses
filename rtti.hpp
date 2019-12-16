@@ -28,7 +28,7 @@ public:
         
     RTTI(std::string class_name, const RTTI* base_rtti)
         : class_name_(class_name)
-        , class_id_(utils::simpleHash(class_name))
+        , class_id_(simpleHash(class_name))
         , base_rtti_(base_rtti) {
             auto& map = flags_map();
             index_ = map[base_rtti]++;
