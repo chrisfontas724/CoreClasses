@@ -5,7 +5,7 @@ Just drop these headers into your project and begin using.
 
 
 
-# Example Usage (Creating Factory Service)
+# Example Usage 1 - Creating Factory Service
 
 
     // Create a base class and include the RTTI_BASE macro:
@@ -35,3 +35,41 @@ Just drop these headers into your project and begin using.
     // RTTI type:
     auto* instance = cxl::Locator::get<BaseFactoryService>()->generate("Derived");
     auto* instance2 = cxl::Locator::get<BaseFactoryService>()->generate(Derived::_RTTI());
+
+
+# Example Usage 2 - Creating Generic Service
+
+Create a class that inherits from IService. Use the RTTI_DERIVED macro from
+above and call DEFINE_SERVICE underneath. IService comes with several pure virtual functions that need to be overriden as well.
+
+    class MyService : public IService {
+        RTTI_DERIVED(MyService, IService)
+    public:
+        // |IService|
+        bool onStartup() override {return true; }
+              
+        // |IService|
+        bool onUpdate() override { return true; }
+ 
+        // |IService|
+        bool onPause() override {return true; }
+              
+        // |IService|
+        bool onResume() override {return true; }
+              
+        // |IService|
+        bool onShutdown() override {return true; }
+              
+        // |IService|
+        bool onReset() override {return true; }
+    };
+    DEFINE_SERVICE(MyService)
+    
+    
+Once your service is defined, it can be managed through the locator. For example, calling the following will cause all your defined serviced to startup:
+    
+    cxl::Locator::startupServices();
+    
+If you're creating a game or some other application with a run-loop, you can likewise update your services at a regular interval with the following:
+    
+    cxl::Locator::updateServices();
