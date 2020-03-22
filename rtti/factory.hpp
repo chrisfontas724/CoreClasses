@@ -1,11 +1,12 @@
-// Copyright 2019 Chris Fontas. All rights reserved.
-// Use of this source code is governed by the license that can be
+// Copyright 2019 Sic Studios. All rights reserved.
+// Use of this source code is governed by our license that can be
 // found in the LICENSE file.
 
 #ifndef FACTORY_HPP_
 #define FACTORY_HPP_
 
-#include "core/rtti/rtti.hpp"
+#include "logging/logging.hpp"
+#include "rtti/rtti.hpp"
 #include <map>
 
 namespace cxl {
@@ -31,6 +32,8 @@ namespace cxl {
         // Register class generator with this factory.
         template <typename GENERATE_TYPE>
         void registerClass() {
+            CXL_DCHECK(GENERATE_TYPE::_RTTI()->isTypeOf(T::_RTTI())) << "Attempting to register incompatible class type";
+            CXL_DCHECK(!registry_.count(GENERATE_TYPE::_RTTI()->class_id()));
             static GeneratorT<GENERATE_TYPE> s_instance;
             registry_[GENERATE_TYPE::_RTTI()->class_id()] = &s_instance;
             class_names_map_[GENERATE_TYPE::_RTTI()->class_id()] = GENERATE_TYPE::_RTTI()->class_name();
@@ -50,6 +53,7 @@ namespace cxl {
         }
         
         T* generate(uint32_t class_id) {
+            CXL_DCHECK(registry_.count(class_id)) << "Could not find class id " << class_id << " in registry";
             if (registry_.count(class_id)) {
                 const Generator* generator = registry_[class_id];
                 return generator->generate();
@@ -58,7 +62,8 @@ namespace cxl {
         }
         
         T* generate(const std::string& name) {
-	        uint32_t class_id = simpleHash(name);
+	        uint32_t class_id = utils::simpleHash(name);
+            CXL_DCHECK(registry_.count(class_id)) << "Could not find class " << name << " in registry";
             if (registry_.count(class_id)) {
                 const Generator* generator = registry_[class_id];
                 return generator->generate();
@@ -67,7 +72,7 @@ namespace cxl {
         }
         
         uint32_t hashClass(const std::string& class_name) {
-            return (uint32_t)simpleHash(class_name);
+            return (uint32_t)utils::simpleHash(class_name);
         }
         
         const std::string& class_name(uint32_t type) {

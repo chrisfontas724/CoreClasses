@@ -1,24 +1,21 @@
-// Copyright 2019 Chris Fontas. All rights reserved.
-// Use of this source code is governed by the license that can be
+// Copyright 2019 Sic Studios. All rights reserved.
+// Use of this source code is governed by our license that can be
 // found in the LICENSE file.
 
 #ifndef RTTI_HPP_
 #define RTTI_HPP_
 
+#include "utils/string_utils.hpp"
 #include <functional>
 #include <map>
-#include <string>
 
 namespace cxl {
-
-inline uint64_t simpleHash(const std::string& str);
-
 class RTTI {
 public:
         
     RTTI(std::string class_name, const RTTI* base_rtti)
         : class_name_(class_name)
-        , class_id_(simpleHash(class_name))
+        , class_id_(utils::simpleHash(class_name))
         , base_rtti_(base_rtti) {
             auto& map = flags_map();
             index_ = map[base_rtti]++;
@@ -55,18 +52,6 @@ protected:
         return map;
     }
 };
-
-inline uint64_t simpleHash(const std::string& str) {
-    // fnv-1a
-    uint64_t hash = 2166136261UL;
-    if (str.c_str()){
-        const char* c = str.c_str();
-        while(*c != '\0') {
-            hash = (hash ^ (*c++)) * 16777619;
-        }
-    }
-    return hash;
-}
 } // cxl
 
 #define RTTI_BASE(CLASSTYPE)                                                       \

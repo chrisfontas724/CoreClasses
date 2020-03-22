@@ -1,11 +1,11 @@
-// Copyright 2019 Chris Fontas. All rights reserved.
-// Use of this source code is governed by the license that can be
+// Copyright 2019 Sic Studios. All rights reserved.
+// Use of this source code is governed by our license that can be
 // found in the LICENSE file.
 
 #ifndef RTTI_SERVICE_HPP_
 #define RTTI_SERVICE_HPP_
 
-#include "core/rtti/factory.hpp"
+#include "rtti/factory.hpp"
 
 namespace cxl {
 
@@ -164,9 +164,10 @@ public:
 
 inline bool Locator::startupServices() {
     // Loop over all services types
-    for (auto& service: getInstance()->service_hash_) {
+    for (auto &service: getInstance()->service_hash_) {
         bool result = service.second->onStartup(); 
         if (!result)  {
+            CXL_LOG(ERROR) << "Could not startup service " << service.second->getRTTI()->class_name();
             return false;
         }
     }
@@ -175,9 +176,10 @@ inline bool Locator::startupServices() {
 
 inline bool Locator::pauseServices() {
     // Loop over all services types
-    for (auto& service: getInstance()->service_hash_) {
+    for (auto &service: getInstance()->service_hash_) {
         bool result = service.second->onPause(); 
         if (!result)  {
+            CXL_LOG(ERROR) << "Could not pause service " << service.second->getRTTI()->class_name();
             return false;
         }
     }
@@ -186,9 +188,10 @@ inline bool Locator::pauseServices() {
 
 inline bool Locator::updateServices() {
     // Loop over all services types
-    for (auto& service: getInstance()->service_hash_) {
+    for (auto &service: getInstance()->service_hash_) {
         bool result = service.second->onUpdate(); 
         if (!result)  {
+            CXL_LOG(ERROR) << "Could not update service " << service.second->getRTTI()->class_name();
             return false;
         }
     }
@@ -197,9 +200,10 @@ inline bool Locator::updateServices() {
 
 inline bool Locator::resetServices() {
     // Loop over all services types
-    for (auto& service: getInstance()->service_hash_) {
+    for (auto &service: getInstance()->service_hash_) {
         bool result = service.second->onReset(); 
         if (!result)  {
+            CXL_LOG(ERROR) << "Could not reset service " << service.second->getRTTI()->class_name();
             return false;
         }
     }
