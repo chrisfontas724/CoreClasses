@@ -10,6 +10,7 @@
 #include <queue>
 #include <mutex>
 #include <functional>
+#include <condition_variable>
 
 namespace cfx {
 
