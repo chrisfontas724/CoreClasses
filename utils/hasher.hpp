@@ -12,13 +12,13 @@ class Hasher {
    public:
     Hasher(uint32_t seed) : hash_(seed) {}
 
-    uint32_t hashString(const std::string& str);
+    void hashString(const std::string& str);
 
     void hashArray(uint32_t* arr, uint32_t num);
 
     template <typename T>
     void hash(T item) {
-        hash_ = crc32(static_cast<uint8_t*>(&item), sizeof(T), hash_);
+        hash_ = crc32(reinterpret_cast<const uint8_t*>(&item), sizeof(T), hash_);
     }
 
     uint32_t get_hash() const { return hash_; }

@@ -15,7 +15,7 @@ uint32_t Hasher::simpleHash(const std::string& str) {
 }
 
 void Hasher::hashString(const std::string& str) {
-    hash_ = crc32(static_cast<uint8_t*>(str), str.size(), hash_);
+    hash_ = crc32(reinterpret_cast<const uint8_t*>(str.data()), str.size(), hash_);
 }
 
 void Hasher::hashArray(uint32_t* arr, uint32_t num) {
