@@ -14,16 +14,14 @@ uint32_t Hasher::simpleHash(const std::string& str) {
     return result;
 }
 
-uint32_t Hasher::hashString(const std::string& str) {
-    return static_cast<uint32_t>(utils::simpleHash(str));
+void Hasher::hashString(const std::string& str) {
+    hash_ = crc32(static_cast<uint8_t*>(str), str.size(), hash_);
 }
 
-uint32_t Hasher::hashArray(uint32_t* arr, uint32_t num) {
-    uint32_t crc = 0;
+void Hasher::hashArray(uint32_t* arr, uint32_t num) {
     for (uint32_t i = 0; i < num; i++) {
-        crc = crc32((uint8_t*)(&arr[i]), sizeof(uint32_t), crc);
+        hash_ = crc32((uint8_t*)(&arr[i]), sizeof(uint32_t), hash_);
     }
-    return crc;
 }
 
 uint32_t Hasher::crc32(const uint8_t* data, uint32_t size, uint32_t crc /*=0*/) {
