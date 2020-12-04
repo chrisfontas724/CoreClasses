@@ -1,8 +1,7 @@
-#include "utils/hasher.hpp"
-
+#include "hasher.hpp"
+#include "string_utils.hpp"
 #include <cmath>
 
-#include "utils/string_utils.hpp"
 
 namespace cxl {
 
