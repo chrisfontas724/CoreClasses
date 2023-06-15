@@ -2,24 +2,23 @@
 # Use of this source code is governed by the license that can be
 # found in the LICENSE file.
 
-# Works with 3.11 and tested through 3.19
-cmake_minimum_required(VERSION 3.11...3.19)
+cmake_minimum_required(VERSION 3.15)
 
-# Project name and a few useful settings. Other commands can pick up the results
-project(
-  Core
-  VERSION 0.1
-  DESCRIPTION "Core helper classes"
-  LANGUAGES CXX)
+project("Useful_Utils"
+    VERSION 0.9.1
+    DESCRIPTION "A project to test out useful utils"
+)
 
-# Only do these if this is the main project, and not if it is included through add_subdirectory
-if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
-    # C++ Compiler Settings.
-    set (CMAKE_CXX_STANDARD 17)
-    set(CMAKE_CXX_STANDARD_REQUIRED ON)
-    set(CMAKE_CXX_EXTENSIONS ON)
-    set(CMAKE_CXX_FLAGS "-std=gnu++17")
-endif()
+set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+add_subdirectory(libraries)
 
-add_subdirectory(src)
+add_executable(${PROJECT_NAME})
+
+target_sources(${PROJECT_NAME}
+    PRIVATE
+        main.cpp
+)
+
+target_link_libraries(${PROJECT_NAME} PRIVATE UsefulUtils)

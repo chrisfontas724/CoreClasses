@@ -1,5 +1,5 @@
-#include <core/dispatch_queue.hpp>
-#include <core/logging.hpp>
+#include "dispatch_queue.hpp"
+#include "logging.hpp"
 
 namespace cfx {
 DispatchQueue::DispatchQueue(uint32_t num_threads, bool is_serial) 

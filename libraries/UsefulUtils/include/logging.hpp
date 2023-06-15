@@ -5,7 +5,8 @@
 #ifndef CORE_LOGGING_LOGGING_HPP_
 #define CORE_LOGGING_LOGGING_HPP_
 
-#include <core/easylogging++.h>
+#include "easylogging++.h"
+INITIALIZE_EASYLOGGINGPP
 
 #define CXL_LOG(SEVERITY) LOG(SEVERITY)
 #define CXL_VLOG(LEVEL) VLOG(LEVEL)
