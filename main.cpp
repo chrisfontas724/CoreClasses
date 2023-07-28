@@ -1,5 +1,6 @@
 #include <iostream>
 #include "logging.hpp"
+INITIALIZE_EASYLOGGINGPP
 
 // Program entry point.
 int main(int argc, char** argv) {

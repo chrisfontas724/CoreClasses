@@ -20,12 +20,15 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 add_library(${PROJECT_NAME} STATIC)
 
-
 target_sources(${PROJECT_NAME}
     PRIVATE
+        src/bounding_box.cpp
+        src/debug_print.cpp
         src/dispatch_queue.cpp 
         src/easylogging++.cpp
+        src/halton_sampler.cpp
         src/hasher.cpp
+        src/transform.cpp
 )
 
 target_include_directories(${PROJECT_NAME}
@@ -41,16 +44,29 @@ target_include_directories(${PROJECT_NAME}
 
 # without it public headers won't get installed
 set(public_headers
+    include/bounding_box.hpp
+    include/debug_print.hpp
     include/dispatch_queue.hpp
     include/easylogging++.h 
     include/factory.hpp
     include/hasher.hpp 
+    include/interpolation.hpp
     include/logging.hpp 
     include/rtti.hpp 
     include/service.hpp 
     include/string_utils.hpp
+    include/transform.hpp
+    include/types.hpp
 )
 
+# Find GLM
+find_package(glm REQUIRED)
+message(STATUS "Version1: GLM included at ${GLM_INCLUDE_DIRS}")
+include_directories(${GLM_INCLUDE_DIRS})
+link_directories(${GLM_LIBRARY_DIRS})
+add_definitions(${GLM_DEFINITIONS})
+
+target_link_libraries(${PROJECT_NAME} glm)
 
 # where to find our CMake modules
 set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
