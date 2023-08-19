@@ -25,9 +25,9 @@ target_sources(${PROJECT_NAME}
         src/bounding_box.cpp
         src/debug_print.cpp
         src/dispatch_queue.cpp 
-        src/easylogging++.cpp
         src/halton_sampler.cpp
         src/hasher.cpp
+        src/initialize.cpp
         src/transform.cpp
 )
 
@@ -70,5 +70,4 @@ target_link_libraries(${PROJECT_NAME} glm)
 
 # where to find our CMake modules
 set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
-#message(STATUS "CMake module path: ${CMAKE_MODULE_PATH}")
 include(Installing)

@@ -1,7 +1,7 @@
 #include "dispatch_queue.hpp"
 #include "logging.hpp"
 
-namespace cfx {
+namespace cxl {
 DispatchQueue::DispatchQueue(uint32_t num_threads, bool is_serial) 
 : threads_(num_threads) 
 , is_serial_(is_serial)
@@ -100,4 +100,4 @@ uint32_t DispatchQueue::num_jobs() {
     return q_.size();
 }
 
-} // cfx
+} // cxl

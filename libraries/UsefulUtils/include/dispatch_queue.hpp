@@ -12,7 +12,7 @@
 #include <functional>
 #include <condition_variable>
 
-namespace cfx {
+namespace cxl {
 
 // A simple dispatch queue for executing work items
 // on multiple threads. 
@@ -51,6 +51,6 @@ private:
 
 	void dispatch_thread_handler(void);
 };
-} // cfx
+} // cxl
 
 #endif // CORE_THREADING_DISPATCH_QUEUE_HPP_
