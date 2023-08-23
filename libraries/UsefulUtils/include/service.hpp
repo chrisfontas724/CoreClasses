@@ -5,7 +5,8 @@
 #ifndef RTTI_SERVICE_HPP_
 #define RTTI_SERVICE_HPP_
 
-#include "rtti/factory.hpp"
+#include "factory.hpp"
+#include <mutex>
 
 namespace cxl {
 

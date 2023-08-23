@@ -5,7 +5,7 @@
 #ifndef RTTI_HPP_
 #define RTTI_HPP_
 
-#include "utils/string_utils.hpp"
+#include "string_utils.hpp"
 #include <functional>
 #include <map>
 

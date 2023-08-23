@@ -5,8 +5,8 @@
 #ifndef FACTORY_HPP_
 #define FACTORY_HPP_
 
-#include "logging/logging.hpp"
-#include "rtti/rtti.hpp"
+#include "logging.hpp"
+#include "rtti.hpp"
 #include <map>
 
 namespace cxl {
